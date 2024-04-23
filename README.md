@@ -8,8 +8,9 @@ You can run each part of the project separately. run "homeApplication" to start 
 By connecting to http://localhost:8080/api/sliders you can check that your server is up and running
 
 You can run "ng serve" or simply run "start" which will start the Angular front-end at http://localhost:4200.  
+for the first time run you might get an error that npm is not installed - to fix it you should go to the terminal in the project, use the line `cd front-end\novi-slide-show` 
+and then use `npm install`
 
-Or run both at once by running the "run-full" option which will do all of the above 
 
 ## How To Use
 
