@@ -1,13 +1,13 @@
-# NoviSlideShow
+# SlideShow
 
-This project is an angular and java project which allow you as the user to create a list of images, and display them as a slideshow. 
+This project is an angular and java project which allow you as the user to create a list of images and display them as a slideshow. 
 
 ## How to run
 
-You can run each part of the project separately. run "homeApplication" to start the Java based restful server in http://localhost:8080 with a h2 local database. 
-By connection to http://localhost:8080/api/sliders you can check that your server is up and running
+You can run each part of the project separately. run "homeApplication" to start the Java-based restful server in http://localhost:8080 with an h2 local database. 
+By connecting to http://localhost:8080/api/sliders you can check that your server is up and running
 
-You can run "ng serve" or simply running "start" you will start the Angular frontend in http://localhost:4200.  
+You can run "ng serve" or simply run "start" which will start the Angular front-end at http://localhost:4200.  
 
 Or run both at once by running the "run-full" option which will do all of the above 
 
@@ -21,4 +21,4 @@ delete the current image that is displayed. you can always go back to the list v
 
 ## Further help
 
-You can always reach out if you have any question! 
+You can always reach out if you have any questions! 
