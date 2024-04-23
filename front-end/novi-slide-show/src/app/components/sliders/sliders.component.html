@@ -1,0 +1,152 @@
+<div class="container">
+  <div *ngIf = "haveSlides ; else addSlidersTemplate">
+
+
+    <!--SlideShow view-->
+    <div *ngIf="viewMode == 'slideshow'">
+      <img [@crossfade]="currentIndex" class="slider-container fadeable" [src]="currentSlide.url" alt="slider image">
+
+      <div class="btn-container">
+        <button type="button" class=" slideshow-add-btn slideshow-btn btn btn-outline-primary" (click)="openAddPopup()">
+          <img src="assets/add.svg" alt="add">
+        </button>
+
+        <button class=" slideshow-delete-btn slideshow-btn btn btn-outline-danger" (click)="openDeletePopup()">
+          <img src="assets/delete.svg" alt="delete">
+        </button>
+      </div>
+
+    </div>
+
+
+
+    <!--list view-->
+    <div *ngIf="viewMode =='list'">
+      <h2 class="centered-header"> Slideshow content editor </h2>
+
+      <table  class="table table-striped table-view" style="text-align: center; justify-content: center">
+        <thead>
+          <tr>
+            <th scope="row">id</th>
+            <th>image/url</th>
+            <th>duration</th>
+            <th>remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let slide of slider">
+            <th scope="row">{{slide.id}}</th>
+            <td><img style="max-width: 2rem; max-height: 2rem" [src]="slide.url" alt ="{{slide.url}}"></td>
+            <td>{{slide.duration}}</td>
+            <td>
+              <button class="btn btn-outline-danger table-btn" (click)="deleteSlide(slide.id)" >
+                  <div class="svg-container">
+                    <img class="image" src="assets/delete.svg" alt="delete">
+                  </div>
+                 </button>
+            </td>
+          </tr>
+
+          <tr>
+            <th>#</th>
+            <td>
+              <input type="text" class="form-control" placeholder="Please provide an image url"  [(ngModel)]="newUrl">
+            </td>
+            <td >
+              <input  type="number" class="form-control duration-table-input" [(ngModel)]="newDuration">
+            </td>
+            <td>
+              <button class="btn btn-outline-primary table-btn" [disabled]="newUrl == null || newUrl == '' || newDuration == null" (click)="saveNewSlide()" >
+                <div class="svg-container">
+                  <img class="image" src="assets/add.svg" alt="add">
+                </div>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-success change-mode-btn" (click)="changeViewMode()">{{changeViewModeText}}</button>
+
+  </div>
+</div>
+
+
+
+
+<ng-template #addSlidersTemplate>
+  <div> no sliders are available , please add you first slider</div>
+</ng-template>
+
+
+
+
+<!--dialog popups modals-->
+
+<!--Add new slider-->
+<div class="modal modal-lg" id="addPopup" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class = "modal-content">
+
+      <div class = "modal-header">
+        <h3 class="modal-title">Add New Slider</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeAddPopup()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="input-group">
+          <label class="input-group-text" for="url">URL</label>
+          <input type="text" class="form-control" id="url" placeholder="Please provide an image url"  [(ngModel)]="newUrl">
+        </div>
+
+        <div class="input-group">
+          <label class="input-group-text" for="duration">Duration</label>
+          <input id="duration" type="number" class="form-control" [(ngModel)]="newDuration">
+        </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" [disabled]="newUrl == null || newDuration == null" class="popup-btn btn btn-outline-primary" (click)="saveNewSlide()">Save</button>
+        <button type="button" class="popup-btn btn btn-outline-secondary" data-bs-dismiss="modal" (click)="closeAddPopup()">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--delete currentslider-->
+<div class="modal modal-lg" id="deletePopup" role="dialog" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class = "modal-content">
+
+      <div class = "modal-header">
+        <h3 class="modal-title">Are you sure you want to delete this slide?</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeDeletePopup()"></button>
+      </div>
+
+      <div class="modal-body" style="display: flex; justify-content: center">
+
+        <div >
+          <img class="preview" [src]="slideToDelete?.url" alt="slide preview">
+        </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" [disabled]="slideToDelete == null" class="popup-btn btn btn-outline-danger" (click)="deleteCurrentSlide()">Delete</button>
+        <button type="button" class="popup-btn btn btn-outline-secondary" data-bs-dismiss="modal" (click)="closeDeletePopup()">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
